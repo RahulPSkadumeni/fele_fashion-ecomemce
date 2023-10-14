@@ -13,7 +13,7 @@ router.get("/categories", getCategory);
 
 // router.post("/categories", async (req, res) => {
 //   console.log("hello");
-//   await addNewCategory;
+
 //   res.status(200).json("success");
 // });
 

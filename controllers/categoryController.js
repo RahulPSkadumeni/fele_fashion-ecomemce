@@ -28,15 +28,3 @@ export const getCategory = async (req, res) => {
     res.status(500).json(error);
   }
 };
-// export const createCategory = async (req, res) => {
-//   console.log("first");
-//   console.log(req.body);
-//   const newCategory = new Category(req.body);
-//   try {
-//     const saveCategory = await newCategory.save();
-//     console.log(saveCategory);
-//     res.status(200).json(saveCategory + " new category created");
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// };

@@ -45,4 +45,19 @@ const addProduct = async (productData) => {
     throw error;
   }
 };
-export { Product, addProduct };
+const productListByCategory = async (categoryId) => {
+  console.log("Inside productListByCategory");
+  try {
+    if (!categoryId) {
+      throw new Error("Category not found");
+    }
+
+    let products = await Product.find({ categoryId });
+
+    return products;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export { Product, addProduct, productListByCategory };

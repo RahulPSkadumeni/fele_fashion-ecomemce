@@ -66,7 +66,6 @@ app.use("/api/product", categoryRoutes);
 app.use("/api/product/", productRouters);
 mongoose
   .connect(
-    // "mongodb+srv://rahulps995:FXUzQB45WFNpFOTG@cluster0.axpd3e6.mongodb.net/?retryWrites=true&w=majority",
     "mongodb+srv://rahulps995:YxXn00k2ytnICiRA@cluster0.9gmrpk1.mongodb.net/?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,

@@ -32,11 +32,29 @@ const addCategory = async (categoryData) => {
 };
 
 const allCategory = async () => {
+  console.log("first");
   try {
     const allCategory = await Category.find({});
+    console.log(allCategory);
     return allCategory;
   } catch (error) {
     throw error;
   }
 };
-export { Category, addCategory, allCategory };
+
+const getCategoryById = async (categoryId) => {
+  try {
+    const category = await Category.findOne({ categoryId: categoryId });
+    console.log(category);
+    console.log(category.length);
+    if (!category) {
+      res.status(404).json({ message: "Category not found" });
+      return; // Exit the function
+    } else {
+      return category;
+    }
+  } catch (err) {
+    console.log("Error in getting category by id", err);
+  }
+};
+export { Category, addCategory, allCategory, getCategoryById };
