@@ -21,6 +21,7 @@ const checkApiKey = (req, res, next) => {
   if (!apiKey || apiKey !== "abcd-efgh-ijlk-1234") {
     return res.status(403).json({ message: "Unauthorized" });
   }
+
   next();
 };
 
@@ -39,18 +40,6 @@ app.use(
   })
 );
 app.use(checkApiKey);
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/assets");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
-});
-
-const upload = multer({ storage });
 
 const PORT = process.env.PORT || 3000;
 
