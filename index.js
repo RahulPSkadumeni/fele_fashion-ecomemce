@@ -10,13 +10,19 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
-//rote import
-
-// import categoryRoutes from "./routes/categoryRoutes.js";
 
 /*MIDDLEware configuration*/
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const checkApiKey = (req, res, next) => {
+  //checking api key
+  const apiKey = req.headers["x-api-key"];
+  if (!apiKey || apiKey !== "abcd-efgh-ijlk-1234") {
+    return res.status(403).json({ message: "Unauthorized" });
+  }
+  next();
+};
 
 const app = express();
 
@@ -24,16 +30,15 @@ app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-// app.use(bodyParser.json({ limit: "30mb", extended: true }));
-// app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 app.use(
   cors({
     origin: ["http://localhost:3001"],
-    method: ["GET", "POST"],
+    method: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
+app.use(checkApiKey);
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 const storage = multer.diskStorage({

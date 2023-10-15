@@ -53,7 +53,14 @@ const productListByCategory = async (categoryId) => {
     }
 
     let products = await Product.find({ categoryId });
-
+    products = products.map((product) => ({
+      productId: product._id,
+      productName: product.productName,
+      price: product.price,
+      productImage: product.productImage,
+      brand: product.brand,
+      categoryId: product.categoryId,
+    }));
     return products;
   } catch (err) {
     throw err;
